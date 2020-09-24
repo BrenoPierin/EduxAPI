@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace EduxAPI.Repositories
 {
-    public class InstituicaoRepository : IInstituicao
+    public class CursoRepository : ICurso
     {
         private readonly EduxContext _ctx;
 
-        public InstituicaoRepository()
+        public CursoRepository()
         {
             _ctx = new EduxContext();
         }
@@ -20,28 +20,24 @@ namespace EduxAPI.Repositories
         /// <summary>
         /// Metodo para alterar
         /// </summary>
-        /// <param name="id">id do produto</param>
-        /// <param name="instituicao">nome da instituição</param>
-        /// <returns></returns>
-        public void Alterar(int id, Instituicao instituicao)
+        /// <param name="id">id do curso</param>
+        /// <param name="curso">nome do curso</param>
+        public void Alterar(int id, Curso curso)
         {
             try
             {
                 //Busca pelo seu Id
-                Instituicao instituicaoTemp = BuscarPorID(id);
+                Curso cursoTemp = BuscarPorID(id);
 
 
                 //Altera as propriedades 
-                instituicaoTemp.Nome = instituicao.Nome;
-                instituicaoTemp.Logradouro = instituicao.Logradouro;
-                instituicaoTemp.Numero = instituicao.Numero;
-                instituicaoTemp.Complemento = instituicao.Complemento;
-                instituicaoTemp.Cidade = instituicao.Cidade;
-                instituicaoTemp.Uf = instituicao.Uf;
-                instituicaoTemp.Cep = instituicao.Cep;
+                cursoTemp.IdInstituicao = curso.IdInstituicao;
+                cursoTemp.IdInstituicaoNavigation = curso.IdInstituicaoNavigation;
+                cursoTemp.Titulo = curso.Titulo;
+                cursoTemp.Turma = curso.Turma;
 
                 //Altera no contexto
-                _ctx.Instituicao.Update(instituicaoTemp);
+                _ctx.Curso.Update(cursoTemp);
                 //Salva
                 _ctx.SaveChanges();
             }
@@ -53,16 +49,16 @@ namespace EduxAPI.Repositories
         }
 
         /// <summary>
-        /// Metodo para buscar uma instituição pelo Id
+        /// Metodo para buscar pelo id
         /// </summary>
-        /// <param name="id">id da instituição</param>
-        /// <returns>instituição do id atribuido</returns>
-        public Instituicao BuscarPorID(int id)
+        /// <param name="id">id do curso</param>
+        /// <returns>curso com determinado id</returns>
+        public Curso BuscarPorID(int id)
         {
             try
             {
-
-                return _ctx.Instituicao.Find(id);
+      
+                return _ctx.Curso.Find(id);
 
             }
             catch (Exception ex)
@@ -72,14 +68,14 @@ namespace EduxAPI.Repositories
         }
 
         /// <summary>
-        /// Metodo para adicionar novas instituições
+        /// metodo para cadastrar
         /// </summary>
-        /// <param name="instituicao">nova instituição</param>
-        public void Cadastrar(Instituicao instituicao)
+        /// <param name="curso">nome do curso</param>
+        public void Cadastrar(Curso curso)
         {
             try
             {
-                _ctx.Instituicao.Add(instituicao);
+                _ctx.Curso.Add(curso);
             }
             catch (Exception ex)
             {
@@ -90,17 +86,17 @@ namespace EduxAPI.Repositories
         /// <summary>
         /// metodo para excluir
         /// </summary>
-        /// <param name="id">id da instituição</param>
+        /// <param name="id">id do curso</param>
         public void Excluir(int id)
         {
             try
             {
-                Instituicao instituicao = BuscarPorID(id);
+                Curso curso = BuscarPorID(id);
 
-                if (instituicao == null)
+                if (curso == null)
                     throw new Exception("Produto não encontrado");
 
-                _ctx.Instituicao.Remove(instituicao);
+                _ctx.Curso.Remove(curso);
                 _ctx.SaveChanges();
             }
             catch (Exception ex)
@@ -112,12 +108,12 @@ namespace EduxAPI.Repositories
         /// <summary>
         /// metodo para listar todos
         /// </summary>
-        /// <returns>Lista de produtos</returns>
-        public List<Instituicao> ListarTodos()
+        /// <returns>lista de curso</returns>
+        public List<Curso> ListarTodos()
         {
             try
             {
-                return _ctx.Instituicao.ToList();
+                return _ctx.Curso.ToList();
             }
             catch (Exception ex)
             {
@@ -125,5 +121,4 @@ namespace EduxAPI.Repositories
             }
         }
     }
-
 }

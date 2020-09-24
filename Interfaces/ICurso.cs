@@ -10,8 +10,8 @@ namespace EduxAPI.Interfaces
     {
         List<Curso> ListarTodos();
         Curso BuscarPorID(int id);
-        Curso Cadastrar(Curso curso);
-        Curso Alterar(int id, Curso curso);
+        void Cadastrar(Curso curso);
+        void Alterar(int id, Curso curso);
         void Excluir(int id);
 
     }

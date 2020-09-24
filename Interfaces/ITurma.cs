@@ -11,9 +11,8 @@ namespace EduxAPI.Interfaces
 
         List<Turma> ListarTodos();
         Turma BuscarPorID(int id);
-        Turma Cadastrar(Turma turma);
-        Turma Alterar(int id, Turma turma);
+        void Cadastrar(Turma turma);
+        void Alterar(int id, Turma turma);
         void Excluir(int id);
-
     }
 }
