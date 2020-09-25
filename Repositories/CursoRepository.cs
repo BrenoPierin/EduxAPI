@@ -22,7 +22,7 @@ namespace EduxAPI.Repositories
         /// </summary>
         /// <param name="id">id do curso</param>
         /// <param name="curso">nome do curso</param>
-        public void Alterar(int id, Curso curso)
+        public void Alterar(Guid id, Curso curso)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace EduxAPI.Repositories
         /// </summary>
         /// <param name="id">id do curso</param>
         /// <returns>curso com determinado id</returns>
-        public Curso BuscarPorID(int id)
+        public Curso BuscarPorID(Guid id)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace EduxAPI.Repositories
         /// metodo para excluir
         /// </summary>
         /// <param name="id">id do curso</param>
-        public void Excluir(int id)
+        public void Excluir(Guid id)
         {
             try
             {

@@ -23,7 +23,7 @@ namespace EduxAPI.Repositories
         /// <param name="id">id do produto</param>
         /// <param name="instituicao">nome da instituição</param>
         /// <returns></returns>
-        public void Alterar(int id, Instituicao instituicao)
+        public void Alterar(Guid id, Instituicao instituicao)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace EduxAPI.Repositories
         /// </summary>
         /// <param name="id">id da instituição</param>
         /// <returns>instituição do id atribuido</returns>
-        public Instituicao BuscarPorID(int id)
+        public Instituicao BuscarPorID(Guid id)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace EduxAPI.Repositories
         /// metodo para excluir
         /// </summary>
         /// <param name="id">id da instituição</param>
-        public void Excluir(int id)
+        public void Excluir(Guid id)
         {
             try
             {

@@ -10,10 +10,10 @@ namespace EduxAPI.Interfaces
     {
 
         List<Instituicao> ListarTodos();
-        Instituicao BuscarPorID(int id);
+        Instituicao BuscarPorID(Guid id);
         void Cadastrar(Instituicao instituicao);
-        void Alterar(int id, Instituicao instituicao);
-        void Excluir(int id);
+        void Alterar(Guid id, Instituicao instituicao);
+        void Excluir(Guid id);
 
     }
 }

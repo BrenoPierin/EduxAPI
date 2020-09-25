@@ -10,9 +10,9 @@ namespace EduxAPI.Interfaces
     {
 
         List<Turma> ListarTodos();
-        Turma BuscarPorID(int id);
+        Turma BuscarPorID(Guid id);
         void Cadastrar(Turma turma);
-        void Alterar(int id, Turma turma);
-        void Excluir(int id);
+        void Alterar(Guid id, Turma turma);
+        void Excluir(Guid id);
     }
 }

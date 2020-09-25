@@ -22,7 +22,7 @@ namespace EduxAPI.Repositories
         /// </summary>
         /// <param name="id">id da Turma</param>
         /// <param name="turma">nome da turma</param>
-        public void Alterar(int id, Turma turma)
+        public void Alterar(Guid id, Turma turma)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace EduxAPI.Repositories
         /// </summary>
         /// <param name="id">Id da Turma</param>
         /// <returns>Turma</returns>
-        public Turma BuscarPorID(int id)
+        public Turma BuscarPorID(Guid id)
         {
              try
              {
@@ -87,7 +87,7 @@ namespace EduxAPI.Repositories
         /// metodo para excluir
         /// </summary>
         /// <param name="id">id da turma</param>
-        public void Excluir(int id)
+        public void Excluir(Guid id)
         {
             try
             {
