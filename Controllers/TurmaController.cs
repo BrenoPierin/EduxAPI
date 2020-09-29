@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EduxAPI.Contexts;
 using EduxAPI.Domains;
+using EduxAPI.Interfaces;
+using EduxAPI.Repositories;
 
 namespace EduxAPI.Controllers
 {
@@ -14,97 +16,114 @@ namespace EduxAPI.Controllers
     [ApiController]
     public class TurmaController : ControllerBase
     {
-        private readonly EduxContext _context;
+        private readonly ITurma _turma;
 
-        public TurmaController(EduxContext context)
+        public TurmaController()
         {
-            _context = context;
+            _turma = new TurmaRepository();
         }
 
         // GET: api/Turma
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Turma>>> GetTurma()
+        public IActionResult Get()
         {
-            return await _context.Turma.ToListAsync();
+            try
+            {
+                //Lista os produtos no repositório
+                var turma = _turma.ListarTodos();
+
+                //Verifica se existe produtos, caso não exista retorna
+                //NoContent - Sem Contúdo
+                if (turma.Count == 0)
+                    return NoContent();
+                return Ok(turma);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra algum erro retorna BadRequest e a mensagem de erro
+                //TODO: Gravar mensagem de erro log e retornar BadRequest
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Turma/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Turma>> GetTurma(int id)
+        public IActionResult Get(Guid id)
         {
-            var turma = await _context.Turma.FindAsync(id);
-
-            if (turma == null)
+            try
             {
-                return NotFound();
-            }
 
-            return turma;
+                var turma = _turma.BuscarPorID(id);
+
+                if (turma == null)
+                    return NotFound();
+
+                return Ok(turma);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Turma/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTurma(int id, Turma turma)
+        public IActionResult Put(Guid id, Turma turma)
         {
-            if (id != turma.IdTurma)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(turma).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TurmaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                _turma.Alterar(id, turma);
 
-            return NoContent();
+                return Ok(turma);
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: api/Turma
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Turma>> PostTurma(Turma turma)
+        public IActionResult Post([FromForm] Turma turma)
         {
-            _context.Turma.Add(turma);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _turma.Cadastrar(turma);
 
-            return CreatedAtAction("GetTurma", new { id = turma.IdTurma }, turma);
+                return Ok(turma);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Turma/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Turma>> DeleteTurma(int id)
+        public IActionResult Delete(Guid Id)
         {
-            var turma = await _context.Turma.FindAsync(id);
-            if (turma == null)
+            try
             {
-                return NotFound();
+                _turma.Excluir(Id);
+
+                return Ok(Id);
             }
+            catch (Exception ex)
+            {
 
-            _context.Turma.Remove(turma);
-            await _context.SaveChangesAsync();
-
-            return turma;
+                return BadRequest(ex.Message);
+            }
         }
 
-        private bool TurmaExists(int id)
-        {
-            return _context.Turma.Any(e => e.IdTurma == id);
-        }
     }
 }

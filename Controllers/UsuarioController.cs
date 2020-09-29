@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EduxAPI.Contexts;
 using EduxAPI.Domains;
+using EduxAPI.Interfaces;
+using EduxAPI.Repositories;
 
 namespace EduxAPI.Controllers
 {
@@ -14,97 +16,113 @@ namespace EduxAPI.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly EduxContext _context;
+        private readonly IUsuario _usuario;
 
-        public UsuarioController(EduxContext context)
+        public UsuarioController()
         {
-            _context = context;
+            _usuario = new UsuarioRepository();
         }
 
         // GET: api/Usuario
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
+        public IActionResult Get()
         {
-            return await _context.Usuario.ToListAsync();
+            try
+            {
+                //Lista os produtos no repositório
+                var usuario = _usuario.ListarTodos();
+
+                //Verifica se existe produtos, caso não exista retorna
+                //NoContent - Sem Contúdo
+                if (usuario.Count == 0)
+                    return NoContent();
+                return Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra algum erro retorna BadRequest e a mensagem de erro
+                //TODO: Gravar mensagem de erro log e retornar BadRequest
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Usuario/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(int id)
+        public IActionResult Get(Guid id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-
-            if (usuario == null)
+            try
             {
-                return NotFound();
-            }
 
-            return usuario;
+                var usuario = _usuario.BuscarPorID(id);
+
+                if (usuario == null)
+                    return NotFound();
+
+                return Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Usuario/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
+        public IActionResult Put(Guid id, Usuario usuario)
         {
-            if (id != usuario.IdUsuario)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(usuario).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsuarioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                _usuario.Alterar(id, usuario);
 
-            return NoContent();
+                return Ok(usuario);
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: api/Usuario
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
+        public IActionResult Post([FromForm] Usuario usuario)
         {
-            _context.Usuario.Add(usuario);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _usuario.Cadastrar(usuario);
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.IdUsuario }, usuario);
+                return Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Usuario/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Usuario>> DeleteUsuario(int id)
+        public IActionResult Delete(Guid Id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            if (usuario == null)
+            try
             {
-                return NotFound();
+                _usuario.Excluir(Id);
+
+                return Ok(Id);
             }
+            catch (Exception ex)
+            {
 
-            _context.Usuario.Remove(usuario);
-            await _context.SaveChangesAsync();
-
-            return usuario;
-        }
-
-        private bool UsuarioExists(int id)
-        {
-            return _context.Usuario.Any(e => e.IdUsuario == id);
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

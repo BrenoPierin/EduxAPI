@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EduxAPI.Contexts;
 using EduxAPI.Domains;
+using EduxAPI.Repositories;
+using EduxAPI.Interfaces;
 
 namespace EduxAPI.Controllers
 {
@@ -14,97 +16,114 @@ namespace EduxAPI.Controllers
     [ApiController]
     public class CursosController : ControllerBase
     {
-        private readonly EduxContext _context;
+        private readonly ICurso _curso;
 
-        public CursosController(EduxContext context)
+        public CursosController()
         {
-            _context = context;
+            _curso = new CursoRepository();
         }
 
         // GET: api/Cursos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Curso>>> GetCurso()
+        public IActionResult Get()
         {
-            return await _context.Curso.ToListAsync();
+            try
+            {
+                //Lista os produtos no repositório
+                var curso = _curso.ListarTodos() ;
+
+                //Verifica se existe produtos, caso não exista retorna
+                //NoContent - Sem Contúdo
+                if (curso.Count == 0)
+                    return NoContent();
+                return Ok(curso);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra algum erro retorna BadRequest e a mensagem de erro
+                //TODO: Gravar mensagem de erro log e retornar BadRequest
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Cursos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Curso>> GetCurso(int id)
+        public IActionResult Get(Guid id)
         {
-            var curso = await _context.Curso.FindAsync(id);
-
-            if (curso == null)
+            try
             {
-                return NotFound();
-            }
 
-            return curso;
+                var curso = _curso.BuscarPorID(id);
+
+                if (curso == null)
+                return NotFound();
+
+                return Ok(curso);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Cursos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCurso(int id, Curso curso)
+        public IActionResult Put(Guid id, Curso curso)
         {
-            if (id != curso.IdCurso)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(curso).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CursoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                _curso.Alterar(id, curso);
 
-            return NoContent();
+                return Ok(curso);
+            
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: api/Cursos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Curso>> PostCurso(Curso curso)
+        public IActionResult Post([FromForm] Curso curso)
         {
-            _context.Curso.Add(curso);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _curso.Cadastrar(curso);
 
-            return CreatedAtAction("GetCurso", new { id = curso.IdCurso }, curso);
+                return Ok(curso);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Cursos/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Curso>> DeleteCurso(int id)
+        public IActionResult Delete(Guid Id)
         {
-            var curso = await _context.Curso.FindAsync(id);
-            if (curso == null)
+            try
             {
-                return NotFound();
+                _curso.Excluir(Id);
+
+                return Ok(Id);
             }
+            catch (Exception ex)
+            {
 
-            _context.Curso.Remove(curso);
-            await _context.SaveChangesAsync();
-
-            return curso;
+                return BadRequest(ex.Message);
+            }
         }
 
-        private bool CursoExists(int id)
-        {
-            return _context.Curso.Any(e => e.IdCurso == id);
-        }
     }
 }

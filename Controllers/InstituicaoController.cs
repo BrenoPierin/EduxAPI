@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EduxAPI.Contexts;
 using EduxAPI.Domains;
+using EduxAPI.Interfaces;
+using EduxAPI.Repositories;
 
 namespace EduxAPI.Controllers
 {
@@ -14,97 +16,113 @@ namespace EduxAPI.Controllers
     [ApiController]
     public class InstituicaoController : ControllerBase
     {
-        private readonly EduxContext _context;
+        private readonly IInstituicao _instituicao;
 
-        public InstituicaoController(EduxContext context)
+        public InstituicaoController()
         {
-            _context = context;
+            _instituicao = new InstituicaoRepository();
         }
 
         // GET: api/Instituicao
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Instituicao>>> GetInstituicao()
+        public IActionResult Get()
         {
-            return await _context.Instituicao.ToListAsync();
+            try
+            {
+                //Lista os produtos no repositório
+                var instituicao = _instituicao.ListarTodos();
+
+                //Verifica se existe produtos, caso não exista retorna
+                //NoContent - Sem Contúdo
+                if (instituicao.Count == 0)
+                    return NoContent();
+                return Ok(instituicao);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra algum erro retorna BadRequest e a mensagem de erro
+                //TODO: Gravar mensagem de erro log e retornar BadRequest
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Instituicao/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Instituicao>> GetInstituicao(int id)
+        public IActionResult Get(Guid id)
         {
-            var instituicao = await _context.Instituicao.FindAsync(id);
-
-            if (instituicao == null)
+            try
             {
-                return NotFound();
-            }
 
-            return instituicao;
+                var instituicao = _instituicao.BuscarPorID(id);
+
+                if (instituicao == null)
+                    return NotFound();
+
+                return Ok(instituicao);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Instituicao/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstituicao(int id, Instituicao instituicao)
+        public IActionResult Put(Guid id, Instituicao instituicao)
         {
-            if (id != instituicao.IdInstituicao)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(instituicao).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!InstituicaoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                _instituicao.Alterar(id, instituicao);
 
-            return NoContent();
+                return Ok(instituicao);
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: api/Instituicao
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Instituicao>> PostInstituicao(Instituicao instituicao)
+        public IActionResult Post([FromForm] Instituicao instituicao)
         {
-            _context.Instituicao.Add(instituicao);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _instituicao.Cadastrar(instituicao);
 
-            return CreatedAtAction("GetInstituicao", new { id = instituicao.IdInstituicao }, instituicao);
+                return Ok(instituicao);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Instituicao/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Instituicao>> DeleteInstituicao(int id)
+        public IActionResult Delete(Guid Id)
         {
-            var instituicao = await _context.Instituicao.FindAsync(id);
-            if (instituicao == null)
+            try
             {
-                return NotFound();
+                _instituicao.Excluir(Id);
+
+                return Ok(Id);
             }
+            catch (Exception ex)
+            {
 
-            _context.Instituicao.Remove(instituicao);
-            await _context.SaveChangesAsync();
-
-            return instituicao;
-        }
-
-        private bool InstituicaoExists(int id)
-        {
-            return _context.Instituicao.Any(e => e.IdInstituicao == id);
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
