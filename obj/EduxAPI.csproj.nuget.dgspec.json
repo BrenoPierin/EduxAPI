@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\EduxAPI.csproj": {}
+    "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\EduxAPI.csproj": {
+    "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
+        "projectUniqueName": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
         "projectName": "EduxAPI",
-        "projectPath": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
-        "packagesPath": "C:\\Users\\bryan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\obj\\",
+        "projectPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
+        "packagesPath": "C:\\Users\\Masseria\\.nuget\\packages\\",
+        "outputPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bryan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Masseria\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,6 +38,12 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.8, )"
@@ -68,7 +74,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[5.5.0, )"
+              "version": "[5.6.3, )"
             }
           },
           "imports": [

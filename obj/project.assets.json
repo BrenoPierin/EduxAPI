@@ -66,10 +66,11 @@
           "lib/netcoreapp2.1/Microsoft.Bcl.HashCode.dll": {}
         }
       },
-      "Microsoft.CodeAnalysis.Analyzers/2.9.4": {
+      "Microsoft.CodeAnalysis.Analyzers/3.3.0": {
         "type": "package",
         "build": {
-          "build/_._": {}
+          "build/Microsoft.CodeAnalysis.Analyzers.props": {},
+          "build/Microsoft.CodeAnalysis.Analyzers.targets": {}
         }
       },
       "Microsoft.CodeAnalysis.Common/3.3.1": {
@@ -740,7 +741,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.OpenApi/1.1.4": {
+      "Microsoft.OpenApi/1.2.3": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {}
@@ -1264,22 +1265,22 @@
           "lib/netstandard2.0/SQLitePCLRaw.provider.dynamic_cdecl.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore/5.5.0": {
+      "Swashbuckle.AspNetCore/5.6.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "3.0.0",
-          "Swashbuckle.AspNetCore.Swagger": "5.5.0",
-          "Swashbuckle.AspNetCore.SwaggerGen": "5.5.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "5.5.0"
+          "Swashbuckle.AspNetCore.Swagger": "5.6.3",
+          "Swashbuckle.AspNetCore.SwaggerGen": "5.6.3",
+          "Swashbuckle.AspNetCore.SwaggerUI": "5.6.3"
         },
         "build": {
           "build/Swashbuckle.AspNetCore.props": {}
         }
       },
-      "Swashbuckle.AspNetCore.Swagger/5.5.0": {
+      "Swashbuckle.AspNetCore.Swagger/5.6.3": {
         "type": "package",
         "dependencies": {
-          "Microsoft.OpenApi": "1.1.4"
+          "Microsoft.OpenApi": "1.2.3"
         },
         "compile": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Swagger.dll": {}
@@ -1291,10 +1292,10 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Swashbuckle.AspNetCore.SwaggerGen/5.5.0": {
+      "Swashbuckle.AspNetCore.SwaggerGen/5.6.3": {
         "type": "package",
         "dependencies": {
-          "Swashbuckle.AspNetCore.Swagger": "5.5.0"
+          "Swashbuckle.AspNetCore.Swagger": "5.6.3"
         },
         "compile": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
@@ -1306,7 +1307,7 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Swashbuckle.AspNetCore.SwaggerUI/5.5.0": {
+      "Swashbuckle.AspNetCore.SwaggerUI/5.6.3": {
         "type": "package",
         "compile": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {}
@@ -2926,14 +2927,15 @@
         "version.txt"
       ]
     },
-    "Microsoft.CodeAnalysis.Analyzers/2.9.4": {
-      "sha512": "alIJhS0VUg/7x5AsHEoovh/wRZ0RfCSS7k5pDSqpRLTyuMTtRgj6OJJPRApRhJHOGYYsLakf1hKeXFoDwKwNkg==",
+    "Microsoft.CodeAnalysis.Analyzers/3.3.0": {
+      "sha512": "DGStrsethnSDdsjTireE68Vu6kXxyvdbJCQjNJTeT620l9XG9fVVz8UYlR7cXVnG+p0UuXkRyLZRj9tw6tUXlw==",
       "type": "package",
-      "path": "microsoft.codeanalysis.analyzers/2.9.4",
+      "path": "microsoft.codeanalysis.analyzers/3.3.0",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "EULA.rtf",
         "ThirdPartyNotices.rtf",
         "analyzers/dotnet/cs/Microsoft.CodeAnalysis.Analyzers.dll",
         "analyzers/dotnet/cs/Microsoft.CodeAnalysis.CSharp.Analyzers.dll",
@@ -2966,9 +2968,38 @@
         "analyzers/dotnet/vb/zh-Hans/Microsoft.CodeAnalysis.Analyzers.resources.dll",
         "analyzers/dotnet/vb/zh-Hant/Microsoft.CodeAnalysis.Analyzers.resources.dll",
         "build/Microsoft.CodeAnalysis.Analyzers.props",
+        "build/Microsoft.CodeAnalysis.Analyzers.targets",
+        "build/config/RulesVersion2_9_8/.editorconfig",
+        "build/config/RulesVersion3_0_0/.editorconfig",
+        "documentation/Analyzer Configuration.md",
         "documentation/Microsoft.CodeAnalysis.Analyzers.md",
         "documentation/Microsoft.CodeAnalysis.Analyzers.sarif",
-        "microsoft.codeanalysis.analyzers.2.9.4.nupkg.sha512",
+        "editorconfig/AllRulesDefault/.editorconfig",
+        "editorconfig/AllRulesDisabled/.editorconfig",
+        "editorconfig/AllRulesEnabled/.editorconfig",
+        "editorconfig/CorrectnessRulesDefault/.editorconfig",
+        "editorconfig/CorrectnessRulesEnabled/.editorconfig",
+        "editorconfig/DataflowRulesDefault/.editorconfig",
+        "editorconfig/DataflowRulesEnabled/.editorconfig",
+        "editorconfig/LibraryRulesDefault/.editorconfig",
+        "editorconfig/LibraryRulesEnabled/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisCompatibilityRulesDefault/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisCompatibilityRulesEnabled/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisCorrectnessRulesDefault/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisCorrectnessRulesEnabled/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisDesignRulesDefault/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisDesignRulesEnabled/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisDocumentationRulesDefault/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisDocumentationRulesEnabled/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisLocalizationRulesDefault/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisLocalizationRulesEnabled/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisPerformanceRulesDefault/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisPerformanceRulesEnabled/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisReleaseTrackingRulesDefault/.editorconfig",
+        "editorconfig/MicrosoftCodeAnalysisReleaseTrackingRulesEnabled/.editorconfig",
+        "editorconfig/PortedFromFxCopRulesDefault/.editorconfig",
+        "editorconfig/PortedFromFxCopRulesEnabled/.editorconfig",
+        "microsoft.codeanalysis.analyzers.3.3.0.nupkg.sha512",
         "microsoft.codeanalysis.analyzers.nuspec",
         "rulesets/AllRulesDefault.ruleset",
         "rulesets/AllRulesDisabled.ruleset",
@@ -2991,6 +3022,8 @@
         "rulesets/MicrosoftCodeAnalysisLocalizationRulesEnabled.ruleset",
         "rulesets/MicrosoftCodeAnalysisPerformanceRulesDefault.ruleset",
         "rulesets/MicrosoftCodeAnalysisPerformanceRulesEnabled.ruleset",
+        "rulesets/MicrosoftCodeAnalysisReleaseTrackingRulesDefault.ruleset",
+        "rulesets/MicrosoftCodeAnalysisReleaseTrackingRulesEnabled.ruleset",
         "rulesets/PortedFromFxCopRulesDefault.ruleset",
         "rulesets/PortedFromFxCopRulesEnabled.ruleset",
         "tools/install.ps1",
@@ -3814,10 +3847,10 @@
         "runtime.json"
       ]
     },
-    "Microsoft.OpenApi/1.1.4": {
-      "sha512": "6SW0tpbJslc8LAY1XniRfLVcJa7bJUbbwvo2/ZRqfkMbJrsqIj9045vg3STtZhDhYRKhpYgjqGU11eeW4Pzyrg==",
+    "Microsoft.OpenApi/1.2.3": {
+      "sha512": "Nug3rO+7Kl5/SBAadzSMAVgqDlfGjJZ0GenQrLywJ84XGKO0uRqkunz5Wyl0SDwcR71bAATXvSdbdzPrYRYKGw==",
       "type": "package",
-      "path": "microsoft.openapi/1.1.4",
+      "path": "microsoft.openapi/1.2.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3827,7 +3860,7 @@
         "lib/netstandard2.0/Microsoft.OpenApi.dll",
         "lib/netstandard2.0/Microsoft.OpenApi.pdb",
         "lib/netstandard2.0/Microsoft.OpenApi.xml",
-        "microsoft.openapi.1.1.4.nupkg.sha512",
+        "microsoft.openapi.1.2.3.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
     },
@@ -4738,22 +4771,22 @@
         "sqlitepclraw.provider.dynamic_cdecl.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore/5.5.0": {
-      "sha512": "u5M8VbX2Y9CETPJNXAYrpuWrji6ehEAWrrgbRh9tHjhql7a2vhJfKV1O48FwhdOAxAQk0Jxm7BqXix5NW2LRKg==",
+    "Swashbuckle.AspNetCore/5.6.3": {
+      "sha512": "UkL9GU0mfaA+7RwYjEaBFvAzL8qNQhNqAeV5uaWUu/Z+fVgvK9FHkGCpTXBqSQeIHuZaIElzxnLDdIqGzuCnVg==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore/5.5.0",
+      "path": "swashbuckle.aspnetcore/5.6.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "build/Swashbuckle.AspNetCore.props",
-        "swashbuckle.aspnetcore.5.5.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
         "swashbuckle.aspnetcore.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.Swagger/5.5.0": {
-      "sha512": "eB9DeUjIsHgYujVe9Mb4aweEcHvJbHwWlLq3fel5ZYe138sTKx0YLtWs80sWseZiN+CX7cfK/nD1mdWEBOfVsQ==",
+    "Swashbuckle.AspNetCore.Swagger/5.6.3": {
+      "sha512": "rn/MmLscjg6WSnTZabojx5DQYle2GjPanSPbCU3Kw8Hy72KyQR3uy8R1Aew5vpNALjfUFm2M/vwUtqdOlzw+GA==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swagger/5.5.0",
+      "path": "swashbuckle.aspnetcore.swagger/5.6.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4763,14 +4796,14 @@
         "lib/netstandard2.0/Swashbuckle.AspNetCore.Swagger.dll",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.Swagger.pdb",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.Swagger.xml",
-        "swashbuckle.aspnetcore.swagger.5.5.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swagger.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.SwaggerGen/5.5.0": {
-      "sha512": "2VGdEG5dXUBSLJ+XIDgMbugyjMWqqzUSWTlQK0yGm+EtKIXFvuP/O4GmJDUBxBx5yOG1muRePti9gL1WjHoB5w==",
+    "Swashbuckle.AspNetCore.SwaggerGen/5.6.3": {
+      "sha512": "CkhVeod/iLd3ikVTDOwG5sym8BE5xbqGJ15iF3cC7ZPg2kEwDQL4a88xjkzsvC9oOB2ax6B0rK0EgRK+eOBX+w==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swaggergen/5.5.0",
+      "path": "swashbuckle.aspnetcore.swaggergen/5.6.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4780,14 +4813,14 @@
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerGen.dll",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerGen.pdb",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerGen.xml",
-        "swashbuckle.aspnetcore.swaggergen.5.5.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggergen.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.SwaggerUI/5.5.0": {
-      "sha512": "/R8g2jUigyM9Z3ZL21ODRrY63qEabCXqGXsOn1DQbWqqAp2hXT7hY5TvaiE0Dlr+20zIo6j8odpwT8zirZL6CQ==",
+    "Swashbuckle.AspNetCore.SwaggerUI/5.6.3": {
+      "sha512": "BPvcPxQRMsYZ3HnYmGKRWDwX4Wo29WHh14Q6B10BB8Yfbbcza+agOC2UrBFA1EuaZuOsFLbp6E2+mqVNF/Je8A==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swaggerui/5.5.0",
+      "path": "swashbuckle.aspnetcore.swaggerui/5.6.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4797,7 +4830,7 @@
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerUI.dll",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerUI.pdb",
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerUI.xml",
-        "swashbuckle.aspnetcore.swaggerui.5.5.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
     },
@@ -8994,29 +9027,30 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Microsoft.CodeAnalysis.Analyzers >= 3.3.0",
       "Microsoft.EntityFrameworkCore >= 3.1.8",
       "Microsoft.EntityFrameworkCore.Design >= 3.1.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.8",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.8",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.8",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
-      "Swashbuckle.AspNetCore >= 5.5.0"
+      "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bryan\\.nuget\\packages\\": {}
+    "C:\\Users\\Masseria\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
+      "projectUniqueName": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
       "projectName": "EduxAPI",
-      "projectPath": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
-      "packagesPath": "C:\\Users\\bryan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\obj\\",
+      "projectPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
+      "packagesPath": "C:\\Users\\Masseria\\.nuget\\packages\\",
+      "outputPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\bryan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Masseria\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9040,6 +9074,12 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Microsoft.CodeAnalysis.Analyzers": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[3.3.0, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[3.1.8, )"
@@ -9070,7 +9110,7 @@
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
-            "version": "[5.5.0, )"
+            "version": "[5.6.3, )"
           }
         },
         "imports": [
