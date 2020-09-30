@@ -9038,19 +9038,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Masseria\\.nuget\\packages\\": {}
+    "C:\\Users\\bryan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
+      "projectUniqueName": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
       "projectName": "EduxAPI",
-      "projectPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
-      "packagesPath": "C:\\Users\\Masseria\\.nuget\\packages\\",
-      "outputPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\obj\\",
+      "projectPath": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
+      "packagesPath": "C:\\Users\\bryan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bryan\\Source\\Repos\\EduxAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Masseria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bryan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -82,3 +82,11 @@ C:\Users\Dell\Desktop\Edux\EduxAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCor
 C:\Users\Dell\Desktop\Edux\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.csproj.CoreCompileInputs.cache
 C:\Users\Dell\Desktop\Edux\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Dell\Desktop\Edux\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\bryan\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.csprojAssemblyReference.cache
+C:\Users\bryan\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.AssemblyInfoInputs.cache
+C:\Users\bryan\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.AssemblyInfo.cs
+C:\Users\bryan\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.csproj.CoreCompileInputs.cache
+C:\Users\bryan\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\bryan\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\bryan\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.dll
+C:\Users\bryan\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.pdb
