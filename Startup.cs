@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace EduxAPI
@@ -27,10 +30,26 @@ namespace EduxAPI
         {
             services.AddControllers();
 
-            // Adicição do serviço Swagger - Guilherme
+            // JWT
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
+
+            // Adicição do serviço Swagger
             services.AddSwaggerGen();
 
-            // Adicionamos as informações gerais da API - Guilherme
+            // Adicionamos as informações gerais da API 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -42,7 +61,7 @@ namespace EduxAPI
                     Contact = new OpenApiContact
                     {
                         Name = "Grupo 6",
-                        Email = string.Empty,
+                        Email = "grupo6eduxapi@portalsenaisp.org.br",
                         Url = new Uri("https://twitter.com/spboyer"),
                     },
                     License = new OpenApiLicense
@@ -63,12 +82,12 @@ namespace EduxAPI
             }
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            // Habilitação do middleware para servir o Swagger gerado como um endpoint JSON. - Guilherme
+            // Habilitação do middleware para servir o Swagger gerado como um endpoint JSON.
             app.UseSwagger();
-            //Configuramos o Endpoit e descrição. - Guilherme
+            //Configuramos o Endpoit e descrição. 
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
