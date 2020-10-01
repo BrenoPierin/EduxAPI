@@ -7,109 +7,121 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EduxAPI.Contexts;
 using EduxAPI.Domains;
-
+using EduxAPI.Interfaces;
+using EduxAPI.Repositories;
 
 namespace EduxAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DicaController
+    public class DicaController : ControllerBase
     {
-        private readonly EduxContext _context;
+        private readonly IDica _dica;
 
-        public DicaController(EduxContext context)
+        public DicaController()
         {
-            _context = context;
+            _dica = new DicaRepository();
         }
 
         // GET: api/Dica
         [HttpGet]
-        public async Task<ActionResult<Dica>> GetDica()
+        public IActionResult Get()
         {
-            return await _context.Dica.ToListAsync();
-        }
-        // GET: api/Dica/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Dica>> GetDica(int id);
-        {
-            var dica = await _context.Dica.FindAsync(id);
-
-            if (dica == null)
-            { 
-            return NotFound();
-            }
-            
-            return dica;
-        }
-
-        // PUT: api/Dica/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDica(int id, Dica dica)
-        {
-            if (id != dica.IdDica)
-            {
-                return BadRequest();
-            }
-        
-            _context.Entry(dica).State = EntityState.Modified;
-                
             try
             {
-                await _context.SaveChangesAsync();
+                //Lista os produtos no repositório
+                var dica = _dica.ListarTodos();
+
+                //Verifica se existe produtos, caso não exista retorna
+                //NoContent - Sem Contúdo
+                if (dica.Count == 0)
+                    return NoContent();
+                return Ok(dica);
             }
-            
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!DicaExists(id))
-                {
-                    return NotFound();
-                }
-                
-                else
-                {
-                    throw;        
-                }
+                //Caso ocorra algum erro retorna BadRequest e a mensagem de erro
+                //TODO: Gravar mensagem de erro log e retornar BadRequest
+                return BadRequest(ex.Message);
             }
-            
-            return NoContent();
-
-
         }
-        // POST: api/Dica
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Dica>> PostDica(Dica dica)
-        {
-        _context.Dica.Add(dica);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction("GetDica", new { id = dica.IdDica }, dica);
-        }
-
-
-        // DELETE: api/Dica/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Dica>> DeleteDica(int id)
-        {
-            var dica = await _context.Dica.FindAsync(id);
-            if (dica == null)
+            // GET: api/Dica/5
+            [HttpGet("{id}")]
+            public IActionResult Get(Guid id)
             {
-                return NotFound();
+                try
+                {
+
+                    var dica = _dica.BuscarPorID(id);
+
+                    if (dica == null)
+                        return NotFound();
+
+                    return Ok(dica);
+                }
+                catch (Exception ex)
+                {
+                    //Caso ocorra um erro retorna BadRequest com a mensagem
+                    //de erro
+                    return BadRequest(ex.Message);
+                }
             }
 
-            _context.Dica.Remove(dica);
-            await _context.SaveChangesAsync();
+            // PUT: api/Dica/5
+            // To protect from overposting attacks, enable the specific properties you want to bind to, for
+            // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+            [HttpPut("{id}")]
+            public IActionResult Put(Guid id, Dica dica)
+            {
+                try
+                {
+                    _dica.Alterar(id, dica);
 
-            return dica;
-        }
+                    return Ok(dica);
 
-        private bool DicaExists(int id)
-        {
-            return _context.Dica.Any(e => e.IdDica == id);
+                }
+                catch (Exception ex)
+                {
 
-            }    
+                    return BadRequest(ex.Message);
+                }
+            }
+            // POST: api/Dica
+            // To protect from overposting attacks, enable the specific properties you want to bind to, for
+            // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+            [HttpPost]
+            public IActionResult Post([FromForm] Dica dica)
+            {
+                try
+                {
+                    _dica.Cadastrar(dica);
+
+                    return Ok(dica);
+                }
+                catch (Exception ex)
+                {
+                    //Caso ocorra um erro retorna BadRequest com a mensagem
+                    //de erro
+                    return BadRequest(ex.Message);
+                }
+            }
+
+
+            // DELETE: api/Dica/5
+            [HttpDelete("{id}")]
+            public IActionResult Delete(Guid Id)
+            {
+                try
+                {
+                    _dica.Excluir(Id);
+
+                    return Ok(Id);
+                }
+                catch (Exception ex)
+                {
+
+                    return BadRequest(ex.Message);
+                }
+            }
     }
 }

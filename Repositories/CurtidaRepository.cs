@@ -11,7 +11,6 @@ namespace EduxAPI.Repositories
     public class CurtidaRepository : ICurtida
     {
         private readonly EduxContext _ctx;
-        private object curtida;
 
         public CurtidaRepository()
         {
@@ -22,8 +21,7 @@ namespace EduxAPI.Repositories
         /// Metodo para alterar
         /// </summary>
         /// <param name="id">id do curso</param>
- 
-        public void Alterar(Guid id, Curso curso)
+        public void Alterar(Guid id, Curtida curtida)
         {
             try
             {
@@ -49,11 +47,6 @@ namespace EduxAPI.Repositories
                 //TODO: Cadastrar Tabela LogErro  mensagem de erro com Tag Geral
                 throw new Exception(ex.Message);
             }
-        }
-
-        public void Alterar(Guid id, Curtida curtida)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -129,3 +122,4 @@ namespace EduxAPI.Repositories
             }
         }
     }
+}

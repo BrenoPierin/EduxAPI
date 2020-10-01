@@ -27,7 +27,7 @@ namespace EduxAPI.Repositories
             try
             {
                 //Busca pelo ID
-                Dica dicaTemp = BuscarPeloID(id);
+                Dica dicaTemp = BuscarPorID(id);
 
 
                 //Altera as propriedades 
@@ -54,7 +54,7 @@ namespace EduxAPI.Repositories
         /// <param name="id">id da dica</param>
         /// <returns>dica com determinado id</returns>
 
-        public void BuscarPorID(Guid id)
+        public Dica BuscarPorID(Guid id)
         {
             try
             {
