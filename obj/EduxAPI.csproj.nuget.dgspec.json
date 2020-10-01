@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj": {}
+    "C:\\Users\\NicolasGabrielLimaCa\\Source\\Repos\\EduxAPI\\EduxAPI.csproj": {}
   },
   "projects": {
-    "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj": {
+    "C:\\Users\\NicolasGabrielLimaCa\\Source\\Repos\\EduxAPI\\EduxAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
+        "projectUniqueName": "C:\\Users\\NicolasGabrielLimaCa\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
         "projectName": "EduxAPI",
-        "projectPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
-        "packagesPath": "C:\\Users\\Masseria\\.nuget\\packages\\",
-        "outputPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\obj\\",
+        "projectPath": "C:\\Users\\NicolasGabrielLimaCa\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
+        "packagesPath": "C:\\Users\\NicolasGabrielLimaCa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NicolasGabrielLimaCa\\Source\\Repos\\EduxAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Masseria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\NicolasGabrielLimaCa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,6 +38,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
             "Microsoft.CodeAnalysis.Analyzers": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",

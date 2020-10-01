@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using EduxAPI.Contexts;
 using EduxAPI.Domains;
+using EduxAPI.Repositories;
+using EduxAPI.Interfaces;
 
 namespace EduxAPI.Controllers
 {
@@ -14,97 +15,96 @@ namespace EduxAPI.Controllers
     [ApiController]
     public class CurtidaController : ControllerBase
     {
-        private readonly EduxContext _context;
+        private readonly ICurtida _curtida;
 
-        public CurtidaController(EduxContext context)
+        public CurtidaController()
         {
-            _context = context;
+            _curtida = new CurtidaRepository();
         }
 
         // GET: api/Curtida
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Curtida>>> GetCurtida()
+        public IActionResult Get()
         {
-            return await _context.Curtida.ToListAsync();
-        }
-
-        // GET: api/Curtida/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Curtida>> GetCurtida(int id)
-        {
-            var curtida = await _context.Curtida.FindAsync(id);
-
-            if (curtida == null)
+            try
             {
-                return NotFound();
-            }
+                //Lista os produtos no repositório
+                var curtida = _curtida.ListarTodos();
 
-            return curtida;
+                //Verifica se existe produtos, caso não exista retorna
+                //NoContent - Sem Contúdo
+                if (curtida.Count == 0)
+                    return NoContent();
+                return Ok(curtida);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra algum erro retorna BadRequest e a mensagem de erro
+                //TODO: Gravar mensagem de erro log e retornar BadRequest
+                return BadRequest(ex.Message);
+            }
         }
 
-        // PUT: api/Curtida/5
+        // GET: api/Cursos/5
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
+        {
+            try
+            {
+
+                var curtida = _curtida.BuscarPorID(id);
+
+                if (curtida == null)
+                    return NotFound();
+
+                return Ok(curtida);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // PUT: api/Cursos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCurtida(int id, Curtida curtida)
+        public IActionResult Put(Guid id, Curtida curtida)
         {
-            if (id != curtida.IdCurtida)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(curtida).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CurtidaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                _curtida.Alterar(id, curtida);
 
-            return NoContent();
+                return Ok(curtida);
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
-        // POST: api/Turma
+        // POST: api/Cursos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Curtida>> PostCurtida(Curtida curtida)
+        public IActionResult Post([FromForm] Curtida curtida)
         {
-            _context.Curtida.Add(curtida);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCurtida", new { id = curtida.IdCurtida }, curtida);
-        }
-
-        // DELETE: api/Turma/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Curtida>> DeleteCurtida(int id)
-        {
-            var curtida = await _context.Curtida.FindAsync(id);
-            if (curtida == null)
+            try
             {
-                return NotFound();
+                _curtida.Cadastrar(curtida);
+
+                return Ok(curtida);
             }
-
-            _context.Curtida.Remove(curtida);
-            await _context.SaveChangesAsync();
-
-            return curtida;
-        }
-
-        private bool CurtidaExists(int id)
-        {
-            return _context.Curtida.Any(e => e.IdCurtida == id);
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

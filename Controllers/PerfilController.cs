@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using EduxAPI.Contexts;
 using EduxAPI.Domains;
+using EduxAPI.Repositories;
+using EduxAPI.Interfaces;
 
 namespace EduxAPI.Controllers
 {
@@ -14,97 +15,114 @@ namespace EduxAPI.Controllers
     [ApiController]
     public class PerfilController : ControllerBase
     {
-        private readonly EduxContext _context;
+        private readonly IPerfil _perfil;
 
-        public PerfilController(EduxContext context)
+        public PerfilController()
         {
-            _context = context;
+            _perfil = new PerfilRepository();
         }
 
         // GET: api/Perfil
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Perfil>>> GetPerfil()
+        public IActionResult Get()
         {
-            return await _context.Perfil.ToListAsync();
+            try
+            {
+                //Lista os produtos no repositório
+                var perfil = _perfil.ListarTodos();
+
+                //Verifica se existe produtos, caso não exista retorna
+                //NoContent - Sem Contúdo
+                if (perfil.Count == 0)
+                    return NoContent();
+                return Ok(perfil);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra algum erro retorna BadRequest e a mensagem de erro
+                //TODO: Gravar mensagem de erro log e retornar BadRequest
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Perfil/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Perfil>> GetPerfil(int id)
+        public IActionResult Get(Guid id)
         {
-            var perfil = await _context.Perfil.FindAsync(id);
-
-            if (perfil == null)
+            try
             {
-                return NotFound();
-            }
 
-            return perfil;
+                var perfil = _perfil.BuscarPorID(id);
+
+                if (perfil == null)
+                    return NotFound();
+
+                return Ok(perfil);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
-        // PUT: api/Perfil/5
+        // PUT: api/Cursos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerfil(int id, Perfil perfil)
+        public IActionResult Put(Guid id, Perfil perfil)
         {
-            if (id != perfil.IdPerfil)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(perfil).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PerfilExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                _perfil.Alterar(id, perfil);
 
-            return NoContent();
+                return Ok(perfil);
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
-        // POST: api/Perfil
+        // POST: api/Cursos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Perfil>> PostTurma(Perfil perfil)
+        public IActionResult Post([FromForm] Perfil perfil)
         {
-            _context.Perfil.Add(perfil);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _perfil.Cadastrar(perfil);
 
-            return CreatedAtAction("GetPerfil", new { id = perfil.IdPerfil }, perfil);
+                return Ok(perfil);
+            }
+            catch (Exception ex)
+            {
+                //Caso ocorra um erro retorna BadRequest com a mensagem
+                //de erro
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Perfil/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Perfil>> DeletePerfil(int id)
+        public IActionResult Delete(Guid Id)
         {
-            var perfil = await _context.Perfil.FindAsync(id);
-            if (perfil == null)
+            try
             {
-                return NotFound();
+                _perfil.Excluir(Id);
+
+                return Ok(Id);
             }
+            catch (Exception ex)
+            {
 
-            _context.Perfil.Remove(perfil);
-            await _context.SaveChangesAsync();
-
-            return perfil;
+                return BadRequest(ex.Message);
+            }
         }
 
-        private bool PerfilExists(int id)
-        {
-            return _context.Perfil.Any(e => e.IdPerfil == id);
-        }
     }
 }
