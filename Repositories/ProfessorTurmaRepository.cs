@@ -30,12 +30,16 @@ namespace EduxAPI.Repositories
                 //Busca pelo seu Id
                 ProfessorTurma professorTurmaTemp = BuscarPorID(id);
 
+
                 //Altera as propriedades 
-                professorTurmaTemp.Permissao = professorTurma.Permissao;
+                professorTurmaTemp.Descricao = professorTurma.Descricao;
+                professorTurmaTemp.IdTurma = professorTurma.IdTurma;
+                professorTurmaTemp.IdTurmaNavigation = professorTurma.IdTurmaNavigation;
+                professorTurmaTemp.IdUsuario = professorTurma.IdUsuario;
+                professorTurmaTemp.IdUsuarioNavigation = professorTurma.IdUsuarioNavigation;
 
                 //Altera no contexto
                 _ctx.ProfessorTurma.Update(professorTurmaTemp);
-
                 //Salva
                 _ctx.SaveChanges();
             }
@@ -44,11 +48,6 @@ namespace EduxAPI.Repositories
                 //TODO: Cadastrar Tabela LogErro  mensagem de erro com Tag Geral
                 throw new Exception(ex.Message);
             }
-        }
-
-        public void Alterar(Guid id, ProfessorTurma professorTurma)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>

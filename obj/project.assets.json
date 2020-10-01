@@ -9070,19 +9070,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\NicolasGabrielLimaCa\\.nuget\\packages\\": {}
+    "C:\\Users\\Masseria\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\NicolasGabrielLimaCa\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
+      "projectUniqueName": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
       "projectName": "EduxAPI",
-      "projectPath": "C:\\Users\\NicolasGabrielLimaCa\\Source\\Repos\\EduxAPI\\EduxAPI.csproj",
-      "packagesPath": "C:\\Users\\NicolasGabrielLimaCa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\NicolasGabrielLimaCa\\Source\\Repos\\EduxAPI\\obj\\",
+      "projectPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\EduxAPI.csproj",
+      "packagesPath": "C:\\Users\\Masseria\\.nuget\\packages\\",
+      "outputPath": "C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\NicolasGabrielLimaCa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Masseria\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9174,5 +9174,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema ao ler o arquivo de cache C:\\Breno USA\\Senai 2 Semestre\\EduxAPI\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

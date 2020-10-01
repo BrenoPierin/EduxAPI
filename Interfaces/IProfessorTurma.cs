@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EduxAPI.Interfaces
 {
-    public class IProfessorTurma
+    public interface IProfessorTurma
     {
 
         List<ProfessorTurma> ListarTodos();

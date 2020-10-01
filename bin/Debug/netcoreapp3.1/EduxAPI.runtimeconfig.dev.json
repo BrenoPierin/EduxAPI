@@ -1,13 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-<<<<<<< HEAD
       "C:\\Users\\Masseria\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\Masseria\\.nuget\\packages"
-=======
-      "C:\\Users\\NicolasGabrielLimaCa\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\NicolasGabrielLimaCa\\.nuget\\packages"
->>>>>>> 22b15da5332197982c18416e5ab7fbe6a61017dd
     ]
   }
 }

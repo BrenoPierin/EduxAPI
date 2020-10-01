@@ -46,30 +46,6 @@ namespace EduxAPI.Repositories
             }
         }
 
-        public void Alterar (Guid id, Perfil perfil)
-        {
-            try
-            {
-                //Busca pelo seu Id
-                Perfil perfilTemp = BuscarPorID(id);
-
-
-                //Altera as propriedades 
-                perfilTemp.IdPerfil = perfil.IdPerfil;
-                perfilTemp.Usuario = perfil.Usuario;
-
-                //Altera no contexto
-                _ctx.Perfil.Update(perfilTemp);
-                //Salva
-                _ctx.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                //TODO: Cadastrar Tabela LogErro  mensagem de erro com Tag Geral
-                throw new Exception(ex.Message);
-            }
-        }
-
         /// <summary>
         /// Metodo para buscar uma categoria pelo Id
         /// </summary>

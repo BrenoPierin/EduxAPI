@@ -393,3 +393,4 @@ C:\Users\NicolasGabrielLimaCa\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxA
 C:\Users\NicolasGabrielLimaCa\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\NicolasGabrielLimaCa\Source\Repos\EduxAPI\obj\Debug\netcoreapp3.1\EduxAPI.MvcApplicationPartsAssemblyInfo.cache
 >>>>>>> 22b15da5332197982c18416e5ab7fbe6a61017dd
+C:\Breno USA\Senai 2 Semestre\EduxAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
