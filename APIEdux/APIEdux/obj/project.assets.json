@@ -5875,20 +5875,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Masseria\\.nuget\\packages\\": {}
+    "C:\\Users\\Dell\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Breno USA\\Senai 2 Semestre\\React\\Edux\\APIEdux\\APIEdux\\APIEdux.csproj",
+      "projectUniqueName": "C:\\Users\\Dell\\Desktop\\API EDUX\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj",
       "projectName": "APIEdux",
-      "projectPath": "C:\\Breno USA\\Senai 2 Semestre\\React\\Edux\\APIEdux\\APIEdux\\APIEdux.csproj",
-      "packagesPath": "C:\\Users\\Masseria\\.nuget\\packages\\",
-      "outputPath": "C:\\Breno USA\\Senai 2 Semestre\\React\\Edux\\APIEdux\\APIEdux\\obj\\",
+      "projectPath": "C:\\Users\\Dell\\Desktop\\API EDUX\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj",
+      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dell\\Desktop\\API EDUX\\EduxAPI\\APIEdux\\APIEdux\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Masseria\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -5966,7 +5971,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -11,8 +11,7 @@ namespace APIEdux.Contexts
         {
         }
 
-        public EduxContext(DbContextOptions<EduxContext> options)
-            : base(options)
+        public EduxContext(DbContextOptions<EduxContext> options) : base(options)
         {
         }
 
@@ -33,7 +32,7 @@ namespace APIEdux.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=.\\SqlExpress; Initial Catalog= EduxProject; User Id=sa; Password=sa132");
+                optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=EduxProject;Integrated Security=True");
             }
         }
 
