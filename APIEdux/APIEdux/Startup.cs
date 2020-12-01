@@ -58,9 +58,9 @@ namespace APIEdux
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Equipe 1",
+                        Name = "Equipe 5",
                         Email = "equipe@gmail.com",
-                        Url = new Uri("https://twitter.com/spboyer"),
+                        Url = new Uri("https://example.com/license"),
                     },
                     License = new OpenApiLicense
                     {
@@ -76,11 +76,19 @@ namespace APIEdux
 
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
+                options.AddDefaultPolicy(
+                    builder => builder.WithOrigins("http://localhost:19006")
                                         .AllowAnyMethod()
                                         .AllowAnyHeader());
 
+            });
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                //Correção do erro object cycle
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                //Remover propriedades nulas
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
         }
 
@@ -103,6 +111,8 @@ namespace APIEdux
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Edux");
             });
+            
+            
 
             app.UseRouting();
 
@@ -112,7 +122,7 @@ namespace APIEdux
 
             app.UseStaticFiles();
 
-            app.UseCors("CorsPolicy");
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

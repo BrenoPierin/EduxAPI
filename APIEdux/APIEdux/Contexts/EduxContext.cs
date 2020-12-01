@@ -32,7 +32,7 @@ namespace APIEdux.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=EduxProject;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress2;Initial Catalog=EduxProject; User Id=sa; Password=sa132");
             }
         }
 

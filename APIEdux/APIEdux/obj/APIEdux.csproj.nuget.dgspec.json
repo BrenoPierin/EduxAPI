@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dell\\Desktop\\API EDUX\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj": {}
+    "C:\\Users\\fic\\Documents\\Edux - Breno\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dell\\Desktop\\API EDUX\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj": {
+    "C:\\Users\\fic\\Documents\\Edux - Breno\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dell\\Desktop\\API EDUX\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj",
+        "projectUniqueName": "C:\\Users\\fic\\Documents\\Edux - Breno\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj",
         "projectName": "APIEdux",
-        "projectPath": "C:\\Users\\Dell\\Desktop\\API EDUX\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj",
-        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dell\\Desktop\\API EDUX\\EduxAPI\\APIEdux\\APIEdux\\obj\\",
+        "projectPath": "C:\\Users\\fic\\Documents\\Edux - Breno\\EduxAPI\\APIEdux\\APIEdux\\APIEdux.csproj",
+        "packagesPath": "C:\\Users\\fic\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fic\\Documents\\Edux - Breno\\EduxAPI\\APIEdux\\APIEdux\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\fic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -30,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,10 +38,15 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.9, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -97,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
