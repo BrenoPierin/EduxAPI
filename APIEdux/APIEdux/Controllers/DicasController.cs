@@ -108,19 +108,11 @@ namespace APIEdux.Controllers
         /// <param name="dica"></param>
         /// <returns>Objeto dica a ser adicionado</returns>
         [HttpPost]
-        public IActionResult Post([FromForm] Dica dica)
+        public IActionResult Post(Dica dica)
         {
             try
             {
-                if (dica.Imagem != null)
-                {
-                    var urlImagem = Upload.Local(dica.Imagem);
-
-                    dica.UrlImagem = urlImagem;
-                }
                 _dicaRepository.Adicionar(dica);
-
-                return Ok(dica);
             }
             catch (Exception ex)
             {
